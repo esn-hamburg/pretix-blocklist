@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.json",
     "dev": "netlify dev"
   },
   "dependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0"
+  "typescript": "^5.4.0",
+  "@types/node": "^20.0.0"
   },
   "devDependencies": {
     "typescript": "^2.0.0"
