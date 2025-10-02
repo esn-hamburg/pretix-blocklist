@@ -4,8 +4,7 @@
     "module": "commonjs",
     "outDir": "netlify/functions",
     "esModuleInterop": true,
-    "strict": true,
-    "types": ["node"]
+	"skipLibCheck" : true
   },
   "include": ["src/functions/**/*.ts"]
 }
