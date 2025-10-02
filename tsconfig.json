@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "netlify/functions",
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "include": ["src/functions/**/*.ts"]
+}

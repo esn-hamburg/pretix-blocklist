@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/functions": "^2.0.0",
+    "netlify-cli": "^23.9.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
