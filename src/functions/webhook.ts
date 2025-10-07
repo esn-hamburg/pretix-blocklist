@@ -5,8 +5,8 @@ const handler: Handler = async (event) => {
   const authHeader = event.headers["authorization"];
 
   //    username:password -> base64 encode
-  const expectedUser = process.env.WEBHOOK_USER!;
-  const expectedPass = process.env.WEBHOOK_PASS!;
+  const expectedUser = process.env.WEBHOOK_USER  || "";
+  const expectedPass = process.env.WEBHOOK_PASS  || "";
   const expectedAuth =
     "Basic " + Buffer.from(`${expectedUser}:${expectedPass}`).toString("base64");
 
