@@ -2,6 +2,11 @@ import { Handler } from "@netlify/functions";
 
 const handler: Handler = async (event) => {
 
+	// Load .env only when running locally
+	if (process.env.NODE_ENV !== "production") {
+	  require("dotenv").config();
+	}
+
   const authHeader = event.headers["authorization"];
 
   //    username:password -> base64 encode
