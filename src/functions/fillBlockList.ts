@@ -1,4 +1,5 @@
-import fetch from "node-fetch";
+//import fetch from "node-fetch";
+require("node-fetch");
 import "dotenv/config";
 import { getSheetsClient, getSheetName } from "../lib/sheets";
 

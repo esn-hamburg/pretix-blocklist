@@ -1,5 +1,6 @@
 import { getSheetsClient } from "../lib/sheets";
-import fetch from "node-fetch";
+require("node-fetch");
+//import fetch from "node-fetch";
 import "dotenv/config";
 
 type PretixEvent = {

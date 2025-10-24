@@ -9,7 +9,8 @@
     "@netlify/functions": "^2.0.0",
     "googleapis": "^161.0.0",
     "jsonwebtoken": "^9.0.2",
-    "netlify-cli": "^23.9.1"
+    "netlify-cli": "^23.9.1",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
