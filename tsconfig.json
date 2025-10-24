@@ -2,9 +2,11 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
-    "outDir": "netlify/functions",
+		"rootDir": "src",
+    "outDir": "netlify",
     "esModuleInterop": true,
-	"skipLibCheck" : true
+	  "skipLibCheck" : true,
+    "strict": true
   },
-  "include": ["src/functions/**/*.ts"]
+  "include": ["src/"]
 }
