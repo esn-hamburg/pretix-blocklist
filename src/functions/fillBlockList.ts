@@ -1,6 +1,7 @@
 //import fetch from "node-fetch";
 require("node-fetch");
 import "dotenv/config";
+import type { Config } from "@netlify/functions"
 import { getSheetsClient, getSheetName } from "../lib/sheets";
 
 type PretixEvent = {
@@ -253,6 +254,26 @@ export async function fillBlockList() {
 }
 
 
-export const config = {
+/**
+ * Scheduled Netlify Function
+ */
+export default async (req: Request) => {
+  console.log("fillBlockList triggered via scheduled function");
+
+  try {
+    await fillBlockList();
+    console.log("fillBlockList completed successfully");
+  } catch (error) {
+    console.error("fillBlockList failed:", error);
+  }
+
+  const { next_run } = await req.json()
+  console.log("Next fillBlockList invocation at:", next_run)
+
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
+};
+
+
+export const config: Config = {
   schedule: "0 9 * * *", // run daily at 09:00 UTC = 10:00 in winter, 11:00 in summer Berlin time
 };

@@ -1,2 +1,8 @@
 [build.environment]
 SECRETS_SCAN_OMIT_PATHS = "node_modules/**"
+
+[functions]
+directory = "netlify/functions/"
+
+# Specifies `esbuild` for functions bundling
+node_bundler = "esbuild"

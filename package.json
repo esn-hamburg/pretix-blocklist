@@ -6,7 +6,7 @@
     "dev": "netlify dev"
   },
   "dependencies": {
-    "@netlify/functions": "^2.0.0",
+    "@netlify/functions": "^2.8.2",
     "googleapis": "^161.0.0",
     "jsonwebtoken": "^9.0.2",
     "netlify-cli": "^23.9.1",

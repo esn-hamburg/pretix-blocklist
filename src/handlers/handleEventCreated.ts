@@ -10,6 +10,62 @@ type PretixEvent = {
   date_to?: string | null;
 };
 
+/**
+ * Checks if all items named "Regular Ticket" are free (default_price = "0.00")
+ * for the given Pretix event.
+ */
+async function isEventFree(eventSlug: string): Promise<boolean> {
+  const pretixUrl = process.env.PRETIX_API_URL!;
+  const pretixToken = process.env.PRETIX_TOKEN!;
+  const organizer = "esnhamburg";
+
+  const response = await fetch(
+    `${pretixUrl}organizers/${organizer}/events/${eventSlug}/items/`,
+    {
+      headers: {
+        Authorization: `Token ${pretixToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    console.error(`Failed to fetch items for event ${eventSlug}: ${response.statusText}`);
+    return false;
+  }
+
+  const data = await response.json();
+  const items = data.results || [];
+
+  // Filter items named "Regular Ticket"
+  const regularTickets = items.filter(
+    (item: any) => item.name?.en === "Regular Ticket" || item.name?.de === "Regular Ticket"
+  );
+
+  if (regularTickets.length === 0) {
+    console.log(`No 'Regular Ticket' items found for event ${eventSlug}`);
+    return false;
+  }
+
+  // Check if all Regular Tickets are free
+  const isFree = regularTickets.every(
+    (item: any) => parseFloat(item.default_price) === 0
+  );
+
+  if (isFree) {
+    console.log(`Event ${eventSlug}: 'Regular Ticket' is free.`);
+  }
+  else {
+      console.log(`Event ${eventSlug}: 'Regular Ticket' is not free.`);
+  }
+
+
+  return isFree;
+}
+
+
+
+
 export async function handleEventCreated(data: any) {
   const sheets = await getSheetsClient();
 
@@ -21,6 +77,13 @@ export async function handleEventCreated(data: any) {
   // Pretix API base URL + token from env vars
   const pretixUrl = process.env.PRETIX_API_URL!;
   const pretixToken = process.env.PRETIX_TOKEN!;
+
+
+  const isFreeEvent = await isEventFree(eventSlug);
+  if (!isFreeEvent) {
+    console.log(`Event ${eventSlug} is not free, skipping.`);
+    return;
+  }
 
   // Fetch event details
   const response = await fetch(

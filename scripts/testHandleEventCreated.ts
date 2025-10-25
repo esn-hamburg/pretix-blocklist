@@ -4,7 +4,7 @@ import { handleEventCreated } from "../src/handlers/handleEventCreated";
   try {
     // Fake Pretix payload
     const fakePayload = {
-      event: { slug: "speedfr241022" },
+      event: "spree-b251121", // "speedfr241022", // /speedat251024
     };
 
     await handleEventCreated(fakePayload);
